@@ -1,0 +1,13 @@
+{
+    "files.autoSave": "afterDelay",
+    "workbench.startupEditor": "none",
+    "explorer.confirmDragAndDrop": false,
+    "workbench.colorTheme": "Solarized Dark",
+    "liveServer.settings.CustomBrowser": "microsoft-edge",
+    "workbench.externalBrowser": "edge",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "workbench.settings.applyToAllProfiles": [
+
+    ]
+}
