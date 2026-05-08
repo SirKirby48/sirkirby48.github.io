@@ -210,3 +210,23 @@ resize: both;
 min-height: initial;
 min-width: initial;
 }
+.button11 {
+background-color: rgb(40, 163, 130);
+border-radius: 12px;
+cursor: pointer;
+padding: 0px 15px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-family: Andy;
+color: rgb(14, 4, 71);}
+.button12 {
+background-color: rgb(40, 163, 130);
+border-radius: 12px;
+cursor: pointer;
+padding: 0px 15px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-family: Andy;
+color: rgb(14, 4, 71);}
