@@ -34,13 +34,31 @@
 <br>
 <button7><a class="button7" href="https://sir-kirby.itch.io/the-tedious-game" target="_blank">The Tedious Game on Itch</a></button7>
 <br>
-<button10 class="button10"><iframe src="https://itch.io/embed-upload/12792750?color=afbfd2" allow="fullscreen" width="500" height="260"><a href="https://sir-kirby.itch.io/the-tedious-game">Play The Tedious Game v1.8.9.1 by Sir_Kirby!</a></iframe></button10>
+<button11 class="button11" onclick="loadItchEmbed()">Load itch.io Embed</button11>
 <br>
 <p>If that does not work, try this:</p>
 <br>
-<button10 class="button10"><iframe src="TheTediousGamev1-8-9-1.html" allow="fullscreen" width="500" height="260"></iframe></button10>
+<button11 class="button11" onclick="loadPuzzleScriptEmbed()">Load PuzzleScript Embed</button11>
 <br>
 
-<script src="script.js"></script>
+<script>
+function loadItchEmbed() {
+let x = document.createElement("IFRAME");
+x.setAttribute("src","https://itch.io/embed-upload/12792750?color=afbfd2");
+x.setAttribute("allow","fullscreen");
+x.setAttribute("width","400px");
+x.setAttribute("height","200px");
+x.setAttribute("name","The Tedious Game by Sir_Kirby!");
+document.body.appendChild(x);
+}
+function loadPuzzleScriptEmbed() {
+let x = document.createElement("IFRAME");
+x.setAttribute("src","TheTediousGamev1-8-9-1.html");
+x.setAttribute("width","400px");
+x.setAttribute("height","200px");
+x.setAttribute("name","The Tedious Game by Sir_Kirby!");
+document.body.appendChild(x);
+}
+</script>
 </body>
 </html>

@@ -18,15 +18,31 @@
 <button8 class="button8"><p>Use the arrow keys or WASD to move, push crates onto their respective target—the tutorial shows which crates go to which targets—and once all crates are on the targets, go to the Goal Flag.</p></button8>
 <button8 class="button8"><p>Or if you want to play it on itch.io, here is the link!</p></button8>
 <br>
-<button7><a class="button7" href="https://sir-kirby.itch.io/a-puzzle-game" target="_blank">A Puzzle of Sorts on Itch</a></button7>
-<br>
-<button10 class="button10"><iframe src="https://itch.io/embed-upload/15538073?color=0484d1" allow="fullscreen" width="500" height="260"><a href="https://sir-kirby.itch.io/a-puzzle-game">A Puzzle Game by Sir_Kirby!</a></iframe></button10>
+<button11 class="button11" onclick="loadItchEmbed()">Load itch.io Embed</button11>
 <br>
 <p>If that does not work, try this:</p>
 <br>
-<button10 class="button10"><iframe src="APuzzleofSortsv0-5-1.html" allow="fullscreen" width="500" height="260"></iframe></button10>
+<button11 class="button11" onclick="loadPuzzleScriptEmbed()">Load PuzzleScript Embed</button11>
 <br>
 
-<script src="script.js"></script>
+<script>
+function loadItchEmbed() {
+let x = document.createElement("IFRAME");
+x.setAttribute("src","https://itch.io/embed-upload/15538073?color=0484d1");
+x.setAttribute("allow","fullscreen");
+x.setAttribute("width","400px");
+x.setAttribute("height","200px");
+x.setAttribute("name","The Tedious Game by Sir_Kirby!");
+document.body.appendChild(x);
+}
+function loadPuzzleScriptEmbed() {
+let x = document.createElement("IFRAME");
+x.setAttribute("src","APuzzleofSortsv0-5-1.html");
+x.setAttribute("width","400px");
+x.setAttribute("height","200px");
+x.setAttribute("name","A Puzzle Game of Sorts by Sir_Kirby!");
+document.body.appendChild(x);
+}
+</script>
 </body>
 </html>
