@@ -15,18 +15,35 @@
 <br>
 <br>
 <strong>Echo Chambers Trailer:</strong>
+<br>
 <button9>
-<iframe width="320" height="240" src="https://www.youtube.com/embed/cxzHtJAnJlk" title="YouTube video player" allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/cxzHtJAnJlk" title="YouTube video player" allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </button9>
 <br>
 <button12 class="button12" onclick="loadConstructEmbed()">Load Construct HTML Embed</button12>
-<button10 id="button10" class="button10"></button10>
 <br>
 <button11 class="button11" onclick="loadItchEmbed()">Load itch.io Embed</button11>
 <!--<iframe frameborder="0" src="https://itch.io/embed-upload/16869772?color=111a43" loading="lazy" allow="fullscreen" width="640" height="380"><a href="https://sir-kirby.itch.io/echo-chambers">Play Echo Chambers on itch.io</a></iframe> !-->
-<br>
-<iframe></iframe>
-<br>
-<script src="script2.js"></script>
+<br> 
+<!-- <script src="script2.js"></script> !-->
+<script>
+function loadItchEmbed() {// let loader2 = <iframe frameborder="0" src="https://itch.io/embed-upload/16869772?color=111a43" allow="fullscreen" width="640" height="380"><a href="https://sir-kirby.itch.io/echo-chambers">Play Echo Chambers on itch.io</a></iframe>
+//document.getElementById("div2").innerHTML = defineProperties(loader2);
+let x = document.createElement("IFRAME");
+x.setAttribute("src","https://itch.io/embed-upload/16869772?color=111a43");
+x.setAttribute("width","400px");
+x.setAttribute("height","200px");
+x.setAttribute("name","Echo Chambers by Sir_Kirby!");
+document.body.appendChild(x);
+}
+function loadConstructEmbed() {
+let x = document.createElement("IFRAME");
+x.setAttribute("src","echoChambers/index.html");
+x.setAttribute("width","400px");
+x.setAttribute("height","200px");
+x.setAttribute("name","Echo Chambers by Sir_Kirby!");
+document.body.appendChild(x);
+}
+</script>
 </body>
 </html>
