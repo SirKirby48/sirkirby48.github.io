@@ -16,9 +16,25 @@
 <br>
 <br>
 <br>
-<button10 class="button10"><iframe src="UnderTheStrip/index.html" allow="fullscreen" width="500" height="260"></iframe></button10>
+<br>
+<strong>The game, Under The Strip</strong>
+<strong>he story revolves around a middle-aged man in the 1950’s, Jason Fisher, who recently got fired from his job at Forb (A stand in company for Ford) who has decided to try his luck in Vegas. The rise of casinos during this time made for many stories of people striking it big.</strong>
+<strong>With the help of his friend, Jason finds himself in trouble with the owner of one of these casinos, The Golden Strip, when he is suspected of cheating to make large sums of money. Unfortunately for Jason, this isn’t just any old casino owner… Eugine Walker may have something else in store for Jason to get his money back.</strong>
+<br>
+<button11 class="button11" onclick="loadConstructEmbed()">Load Construct Embed</button11>
 <br>
 
-<script src="script.js"></script>
+<script>
+function loadConstructEmbed() {
+let x = document.createElement("IFRAME");
+x.setAttribute("src","UnderTheStrip/index.html");
+x.setAttribute("width","400px");
+x.setAttribute("allow","fullscreen");
+x.setAttribute("height","200px");
+x.setAttribute("name","Under the Strip by ManaForge");
+document.body.appendChild(x);
+}
+
+</script>
 </body>
 </html>
