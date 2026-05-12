@@ -230,3 +230,23 @@ text-decoration: none;
 display: inline-block;
 font-family: Andy;
 color: rgb(14, 4, 71);}
+.input {
+background-color: rgb(40, 163, 130);
+border-radius: 12px;
+cursor: pointer;
+padding: 0px 15px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-family: Andy;
+color: rgb(14, 4, 71);}
+.button13 {
+background-color: rgb(40, 163, 130);
+border-radius: 12px;
+cursor: pointer;
+padding: 0px 15px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-family: Andy;
+color: rgb(47, 34, 124);}
