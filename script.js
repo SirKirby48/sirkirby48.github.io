@@ -43,8 +43,10 @@ function NumberFunction1() {
   }
 
   function NumberFunction3() {
-    document.getElementById("output8").innerHTML = document.getElementById("NumberInput31").valueAsNumber/document.getElementById("NumberInput32").valueAsNumber;
     console.log(NumberInput31.valueAsNumber/NumberInput32.valueAsNumber);
+    if ((NumberInput31.valueAsNumber / NumberInput32.valueAsNumber) == Infinity) {document.getElementById("output8").innerHTML = "Divide By 0 Error"}
+    else {document.getElementById("output8").innerHTML = document.getElementById("NumberInput31").valueAsNumber/document.getElementById("NumberInput32").valueAsNumber}
+    console.log(document.getElementById("output8").innerHTML);
     return NumberInput31.valueAsNumber / NumberInput32.valueAsNumber;
   }
 
