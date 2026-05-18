@@ -15,7 +15,7 @@ document.getElementById("output2").innerHTML = text; }
 
 function double(anum) { let text2 = "";
 console.log(anum);
-text2 = document.getElementById("NumberInput1").valueAsNumber * 2;
+if (isNaN(document.getElementById("NumberInput1").valueAsNumber)) {text2 = "Enter a number, not nothing!"} else {text2 = document.getElementById("NumberInput1").valueAsNumber * 2;};
 document.getElementById("output3").innerHTML = text2;
 console.log(text2);
 return anum * 2
@@ -57,7 +57,6 @@ function NumberFunction1() {
   }
 
 function RolltheDiceFunction() {const numbervar2 = 1; let text6 = "";  const text5 = "The dice result is..... "; let NumberDice = document.getElementById("DicedInput").valueAsNumber;
-
 if (NumberDice < 2 || isNaN(NumberDice)) {text6 =  "Your input is less than 2 or it is not a number"} else {text6 =  text5 + (Math.floor(Math.random() * (NumberDice - numbervar2)) + numbervar2);};
 document.getElementById("output6").innerHTML = text6;
  console.log(numbervar2);
