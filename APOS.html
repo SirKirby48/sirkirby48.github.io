@@ -30,23 +30,90 @@
 <button class="button11" onclick="loadPuzzleScriptEmbed()">Load PuzzleScript Embed</button>
 <br>
 
-<script>
-function loadItchEmbed() {
-let x = document.createElement("IFRAME");
-x.setAttribute("src","https://itch.io/embed-upload/15538073?color=0484d1");
-x.setAttribute("allow","fullscreen");
-x.setAttribute("width","400px");
-x.setAttribute("height","200px");
-x.setAttribute("name","The Tedious Game by Sir_Kirby!");
-document.body.appendChild(x);
+<style>
+/* Fullscreen-friendly embed container */
+.embed-container { display: inline-block; position: relative; margin: 10px 0; }
+.embed-container iframe { display: block; width: 400px; height: 200px; border: 0; border-radius: 6px; }
+.embed-fs-btn {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	z-index: 50;
 }
+
+/* When the container goes fullscreen, make it and the iframe fill the viewport */
+.embed-container:fullscreen, .embed-container:-webkit-full-screen, .embed-container:-moz-full-screen {
+	width: 100vw !important;
+	height: 100vh !important;
+	margin: 0 !important;
+}
+.embed-container:fullscreen iframe, .embed-container:-webkit-full-screen iframe, .embed-container:-moz-full-screen iframe {
+	width: 100% !important;
+	height: 100% !important;
+}
+</style>
+
+<script>
+function _requestFullscreen(el) {
+	if (!el) return;
+	var fn = el.requestFullscreen || el.mozRequestFullScreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+	if (fn) {
+		fn.call(el);
+	} else {
+		// no fullscreen support
+		alert('Your browser does not support fullscreen for this element.');
+	}
+}
+
+function _createEmbed(src, name) {
+	// container
+	var container = document.createElement('div');
+	container.className = 'embed-container';
+
+	// iframe
+	var iframe = document.createElement('iframe');
+	iframe.setAttribute('src', src);
+	iframe.setAttribute('name', name || 'embed');
+	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
+	iframe.setAttribute('allowfullscreen', '');
+	iframe.style.border = '0';
+
+	// fullscreen button
+	var fsBtn = document.createElement('button');
+	fsBtn.className = 'embed-fs-btn button11';
+	fsBtn.textContent = 'Fullscreen';
+	fsBtn.onclick = function () {
+		// Prefer making the container fullscreen so the iframe can size to it
+		_requestFullscreen(container);
+	};
+
+	// append children and return container
+	container.appendChild(iframe);
+	container.appendChild(fsBtn);
+	return container;
+}
+
+function loadItchEmbed() {
+	// restore original simple iframe insertion for itch embed (it already supported fullscreen)
+	let x = document.createElement("IFRAME");
+	x.setAttribute("src","https://itch.io/embed-upload/15538073?color=0484d1");
+	x.setAttribute("allow","fullscreen");
+	x.setAttribute("width","400px");
+	x.setAttribute("height","200px");
+	x.setAttribute("name","The Tedious Game by Sir_Kirby!");
+	x.setAttribute('allowfullscreen', '');
+	document.body.appendChild(x);
+}
+
 function loadPuzzleScriptEmbed() {
-let x = document.createElement("IFRAME");
-x.setAttribute("src","APuzzleOfSortsv0-5-1.html");
-x.setAttribute("width","400px");
-x.setAttribute("height","200px");
-x.setAttribute("name","A Puzzle Game of Sorts by Sir_Kirby!");
-document.body.appendChild(x);
+	var embed = _createEmbed('APuzzleOfSortsv0-5-1.html', 'A Puzzle Game of Sorts by Sir_Kirby!');
+	document.body.appendChild(embed);
 }
 </script>
 </body>

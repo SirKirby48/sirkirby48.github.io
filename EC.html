@@ -31,22 +31,74 @@
 <br>
 <iframe src="https://itch.io/embed/3944305?linkback=true&amp;bg_color=1e39a1&amp;fg_color=43e5fa&amp;link_color=63cb9b&amp;border_color=3e4770" width="400" height="200"><a href="https://sir-kirby.itch.io/echo-chambers">Echo Chambers by Sir_Kirby!</a></iframe>
 <br> 
-<script>
-function loadItchEmbed() {
-let x = document.createElement("IFRAME");
-x.setAttribute("src","https://itch.io/embed-upload/16869772?color=111a43");
-x.setAttribute("width","400px");
-x.setAttribute("height","200px");
-x.setAttribute("name","Echo Chambers by Sir_Kirby!");
-document.body.appendChild(x);
+<style>
+/* Reuse embed container styles (kept local to this page) */
+.embed-container { display: inline-block; position: relative; margin: 10px 0; }
+.embed-container iframe { display: block; width: 400px; height: 200px; border: 0; border-radius: 6px; }
+.embed-fs-btn {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	z-index: 50;
 }
+.embed-container:fullscreen, .embed-container:-webkit-full-screen, .embed-container:-moz-full-screen {
+	width: 100vw !important;
+	height: 100vh !important;
+	margin: 0 !important;
+}
+.embed-container:fullscreen iframe, .embed-container:-webkit-full-screen iframe, .embed-container:-moz-full-screen iframe {
+	width: 100% !important;
+	height: 100% !important;
+}
+</style>
+
+<script>
+function _requestFullscreen(el) {
+	if (!el) return;
+	var fn = el.requestFullscreen || el.mozRequestFullScreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+	if (fn) {
+		fn.call(el);
+	} else {
+		alert('Your browser does not support fullscreen for this element.');
+	}
+}
+
+function _createEmbed(src, name) {
+	var container = document.createElement('div');
+	container.className = 'embed-container';
+	var iframe = document.createElement('iframe');
+	iframe.setAttribute('src', src);
+	iframe.setAttribute('name', name || 'embed');
+	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
+	iframe.setAttribute('allowfullscreen', '');
+	iframe.style.border = '0';
+	var fsBtn = document.createElement('button');
+	fsBtn.className = 'embed-fs-btn button11';
+	fsBtn.textContent = 'Fullscreen';
+	fsBtn.onclick = function () { _requestFullscreen(container); };
+	container.appendChild(iframe);
+	container.appendChild(fsBtn);
+	return container;
+}
+
+function loadItchEmbed() {
+	let x = document.createElement("IFRAME");
+	x.setAttribute("src","https://itch.io/embed-upload/16869772?color=111a43");
+	x.setAttribute("width","400px");
+	x.setAttribute("height","200px");
+	x.setAttribute("name","Echo Chambers by Sir_Kirby!");
+	document.body.appendChild(x);
+}
+
 function loadConstructEmbed() {
-let x = document.createElement("IFRAME");
-x.setAttribute("src","echoChambers/index.html");
-x.setAttribute("width","400px");
-x.setAttribute("height","200px");
-x.setAttribute("name","Echo Chambers by Sir_Kirby!");
-document.body.appendChild(x);
+	var embed = _createEmbed('echoChambers/index.html', 'Echo Chambers by Sir_Kirby!');
+	document.body.appendChild(embed);
 }
 </script>
 </body>

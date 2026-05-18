@@ -30,15 +30,65 @@
 <button11 class="button11" onclick="loadConstructEmbed()">Load Construct Embed</button11>
 <br>
 
+<style>
+/* Embed container styles reused across pages */
+.embed-container { display: inline-block; position: relative; margin: 10px 0; }
+.embed-container iframe { display: block; width: 400px; height: 200px; border: 0; border-radius: 6px; }
+.embed-fs-btn {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	z-index: 50;
+}
+.embed-container:fullscreen, .embed-container:-webkit-full-screen, .embed-container:-moz-full-screen {
+	width: 100vw !important;
+	height: 100vh !important;
+	margin: 0 !important;
+}
+.embed-container:fullscreen iframe, .embed-container:-webkit-full-screen iframe, .embed-container:-moz-full-screen iframe {
+	width: 100% !important;
+	height: 100% !important;
+}
+</style>
+
 <script>
+function _requestFullscreen(el) {
+	if (!el) return;
+	var fn = el.requestFullscreen || el.mozRequestFullScreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+	if (fn) {
+		fn.call(el);
+	} else {
+		alert('Your browser does not support fullscreen for this element.');
+	}
+}
+
+function _createEmbed(src, name) {
+	var container = document.createElement('div');
+	container.className = 'embed-container';
+	var iframe = document.createElement('iframe');
+	iframe.setAttribute('src', src);
+	iframe.setAttribute('name', name || 'embed');
+	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
+	iframe.setAttribute('allowfullscreen', '');
+	iframe.style.border = '0';
+	var fsBtn = document.createElement('button');
+	fsBtn.className = 'embed-fs-btn button11';
+	fsBtn.textContent = 'Fullscreen';
+	fsBtn.onclick = function () { _requestFullscreen(container); };
+	container.appendChild(iframe);
+	container.appendChild(fsBtn);
+	return container;
+}
+
 function loadConstructEmbed() {
-let x = document.createElement("IFRAME");
-x.setAttribute("src","UnderTheStrip/index.html");
-x.setAttribute("width","400px");
-x.setAttribute("allow","fullscreen");
-x.setAttribute("height","200px");
-x.setAttribute("name","Under the Strip by ManaForge");
-document.body.appendChild(x);
+	var embed = _createEmbed('UnderTheStrip/index.html', 'Under the Strip by ManaForge');
+	document.body.appendChild(embed);
 }
 
 </script>

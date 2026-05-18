@@ -216,6 +216,37 @@ resize: both;
 min-height: initial;
 min-width: initial;
 }
+
+/* Ambient mode for iframes: subtle glow and gentle lift on hover similar to YouTube's ambient */
+.iframe-ambient,
+iframe {
+    transition: transform 240ms ease, box-shadow 240ms ease, filter 240ms ease;
+    /* constant blue ambient glow (increased intensity ~40%) */
+    box-shadow: 0 12px 28px rgba(48, 84, 153, 0.22), 0 0 20px rgba(81, 160, 255, 0.22);
+    border-radius: 6px;
+    /* light bluish background so the glow reads well */
+    background-color: rgba(199, 215, 240, 0.28);
+    display: inline-block;
+}
+
+iframe:hover,
+.iframe-ambient:hover {
+    transform: translateY(-6px);
+    /* keep the same blue ambient glow while adding lift */
+    box-shadow: 0 12px 28px rgba(48, 84, 153, 0.22), 0 0 20px rgba(81, 160, 255, 0.22);
+    filter: saturate(1.04) contrast(1.03);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    iframe,
+    .iframe-ambient,
+    iframe:hover,
+    .iframe-ambient:hover {
+        transition: none;
+        transform: none !important;
+    }
+}
 .button11 {
 background-color: rgb(40, 163, 130);
 border-radius: 12px;
@@ -256,3 +287,21 @@ text-decoration: none;
 display: inline-block;
 font-family: Andy;
 color: rgb(47, 34, 124);}
+/* Hover bounce animation: elements with classes that start with "button" and native
+     button/input elements will gently move up and down while hovered. Kept short and
+     subtle to avoid layout shift. */
+@keyframes hover-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Apply the animation only while hovered. Using class^ selector covers
+     .button1 .. .button13 and similar names. */
+[class^="button"]:hover,
+a[class^="button"]:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    animation: hover-bounce 0.6s ease-in-out infinite;
+    will-change: transform;
+}
