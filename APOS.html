@@ -67,27 +67,27 @@ function _requestFullscreen(el) {
 		fn.call(el);
 	} else {
 		// no fullscreen support
-		alert('Your browser does not support fullscreen for this element.');
+		alert("Your browser does not support fullscreen for this element.");
 	}
 }
 
 function _createEmbed(src, name) {
 	// container
-	var container = document.createElement('div');
-	container.className = 'embed-container';
+	var container = document.createElement("div");
+	container.className = "embed-container";
 
 	// iframe
-	var iframe = document.createElement('iframe');
-	iframe.setAttribute('src', src);
-	iframe.setAttribute('name', name || 'embed');
-	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
-	iframe.setAttribute('allowfullscreen', '');
-	iframe.style.border = '0';
+	var iframe = document.createElement("iframe");
+	iframe.setAttribute("src", "APuzzleOfSortsv0-5-1.html");
+	iframe.setAttribute("name", name || "embed");
+	iframe.setAttribute("allow", "autoplay; fullscreen; encrypted-media");
+	iframe.setAttribute("allowfullscreen", "");
+	iframe.style.border = "0";
 
 	// fullscreen button
-	var fsBtn = document.createElement('button');
-	fsBtn.className = 'embed-fs-btn button11';
-	fsBtn.textContent = 'Fullscreen';
+	var fsBtn = document.createElement("button");
+	fsBtn.className = "embed-fs-btn button11";
+	fsBtn.textContent = "Fullscreen";
 	fsBtn.onclick = function () {
 		// Prefer making the container fullscreen so the iframe can size to it
 		_requestFullscreen(container);
@@ -106,13 +106,13 @@ function loadItchEmbed() {
 	x.setAttribute("allow","fullscreen");
 	x.setAttribute("width","400px");
 	x.setAttribute("height","200px");
-	x.setAttribute("name","The Tedious Game by Sir_Kirby!");
-	x.setAttribute('allowfullscreen', '');
+	x.setAttribute("name","A Puzzle of Sorts by Sir_Kirby!");
+	x.setAttribute("allowfullscreen", "");
 	document.body.appendChild(x);
 }
 
 function loadPuzzleScriptEmbed() {
-	var embed = _createEmbed('APuzzleOfSortsv0-5-1.html', 'A Puzzle Game of Sorts by Sir_Kirby!');
+	var embed = _createEmbed("APuzzleOfSortsv0-5-1.html", "A Puzzle Game of Sorts by Sir_Kirby!");
 	document.body.appendChild(embed);
 }
 </script>

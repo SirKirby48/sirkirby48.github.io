@@ -1,21 +1,20 @@
 h1 { 
-text-align:
-center;
+text-align: left;
 font-family: Xanmono;
 color: rgb(4, 53, 102);
-font-size: 23.5px;
+font-size: 31.5px;
 }
 h2 { 
-text-align: center;
+text-align: left;
 font-family: Xanmono;
 color: rgb(4, 53, 102);
-font-size: 17.5px;
+font-size: 25.5px;
     }
 h3 {
-text-align: center;
+text-align: left;
 font-family: Xanmono;
 color: rgb(4, 53, 102);
-font-size: 14.5px;
+font-size: 22.5px;
 }
 h4 {
 text-align: left;
@@ -23,17 +22,17 @@ column-count: 2;
 column-width: 75px;
 color: rgb(6, 43, 80);
 font-family: Xanmono;
-font-size: 10px;
+font-size: 18px;
 }
 
 .header1 {
 background-color: rgba(61, 204, 156, 0.774);
-/* padding: 15px 32px; */
+padding: 15px 16px 15px 16px; 
 border-radius: 12px;
-margin-top: 10px;
+margin-top: 64px;
 color: rgb(4, 53, 102);
 text-align: center;
-font-size: 12px;
+font-size: 20px;
 height: 50px;
 align-content: center;
 align-self: center;
@@ -49,6 +48,7 @@ box-sizing: border-box;
 @media (max-width: 600px) {
 .header1 {
 width: 100%;
+height: auto;
 }
 }
 
@@ -58,35 +58,34 @@ column-count: 2;
 column-width: 75px;
 color: rgb(6, 43, 80);
 font-family: Xanmono;
-font-size: 12px;
+font-size: 20px;
 }
 strong {
 text-align: left;
-column-count: 2;
-column-width: 75px;
 color: rgb(6, 43, 80);
 font-family: Andy;
-font-size: 18px;
+font-size: 26px;
 }
 .strong1 {
 text-align: center;
 color: rgb(6, 43, 80);
 font-family: Andy;
-font-size: 24px;
+font-size: 32px;
 }
 a:link {
 color: rgb(47, 100, 153);
 font-family: Andy;
-font-size: 18px;
-text-decoration: none;
-}
-a:hover {
-color: rgb(17, 32, 167);
-font-family: Xanmono;
-font-size: 12px;
+font-size: 26px;
 text-decoration: none;
 }
 /*
+a:hover {
+color: rgb(17, 32, 167);
+font-family: Xanmono;
+font-size: 20px;
+text-decoration: none;
+}
+*/
 a:active {
 color: rgb(47, 100, 153);
 font-family: Xanmono;
@@ -97,7 +96,7 @@ color: rgb(95, 107, 218);
 font-family: DDF;
 text-decoration: none;
 }
-*/
+
 @font-face {
 font-family: Xanmono;
 src: url(Fonts/Xanmono-Regular.ttf);
@@ -201,8 +200,8 @@ border-style: solid;
 .button10 {
 background-color: rgb(40, 163, 87);
 border-radius: 12px;
-cursor: crosshair;
-padding: 0px 10px;
+cursor: default;
+padding: 0px 5px 0px 5px;
 text-align: center;
 text-decoration: none;
 display: inline-block;
@@ -229,13 +228,7 @@ iframe {
     display: inline-block;
 }
 
-iframe:hover,
-.iframe-ambient:hover {
-    transform: translateY(-6px);
-    /* keep the same blue ambient glow while adding lift */
-    box-shadow: 0 12px 28px rgba(48, 84, 153, 0.22), 0 0 20px rgba(81, 160, 255, 0.22);
-    filter: saturate(1.04) contrast(1.03);
-}
+/* Removed hover lift for iframes — keep only the ambient glow and subtle effects */
 
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
@@ -246,7 +239,7 @@ iframe:hover,
         transition: none;
         transform: none !important;
     }
-}
+} 
 .button11 {
 background-color: rgb(40, 163, 130);
 border-radius: 12px;
@@ -267,16 +260,28 @@ text-decoration: none;
 display: inline-block;
 font-family: Andy;
 color: rgb(14, 4, 71);}
-.input {
+/* apply to elements with class .input and to native input elements (number/text) used in pages */
+.input,
+input,
+input[type="number"],
+input[type="text"] {
 background-color: rgb(40, 163, 130);
 border-radius: 12px;
 cursor: pointer;
-padding: 0px 15px;
+padding: 0px 5px 0px 5px;
 text-align: center;
 text-decoration: none;
 display: inline-block;
 font-family: Andy;
-color: rgb(14, 4, 71);}
+font-size: 18px;
+color: rgb(47, 100, 153); 
+/* allow smooth width changes when content grows */
+min-width: 120px;
+max-width: 90%;
+width: auto;
+transition: width 180ms ease;
+white-space: nowrap;
+}
 .button13 {
 background-color: rgb(40, 163, 130);
 border-radius: 12px;
@@ -287,21 +292,54 @@ text-decoration: none;
 display: inline-block;
 font-family: Andy;
 color: rgb(47, 34, 124);}
-/* Hover bounce animation: elements with classes that start with "button" and native
-     button/input elements will gently move up and down while hovered. Kept short and
-     subtle to avoid layout shift. */
-@keyframes hover-bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+
+/* Pop-up bounce on hover for buttons except .button8 and .button10 */
+/* Apply to any class that starts with "button" (button1..button13) but exclude the two selectors explicitly */
+.button1, .button2, .button3, .button4, .button5, .button6, .button7, .button9, .button11, .button12, .button13 {
+    /* set transform origin for natural lift */
+    transform-origin: center bottom;
+    transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease;
 }
 
-/* Apply the animation only while hovered. Using class^ selector covers
-     .button1 .. .button13 and similar names. */
-[class^="button"]:hover,
-a[class^="button"]:hover,
-button:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover {
-    animation: hover-bounce 0.6s ease-in-out infinite;
-    will-change: transform;
+/* Hover: pop up with a slight bounce */
+.button1:hover, .button2:hover, .button3:hover, .button4:hover, .button5:hover, .button6:hover, .button7:hover, .button9:hover, .button11:hover, .button12:hover, .button13:hover {
+    animation: popup-bounce 360ms both;
+    /* subtle shadow while lifted */
+    box-shadow: 0 10px 18px rgba(0,0,0,0.18);
+}
+
+@keyframes popup-bounce {
+    0% { transform: translateY(0) scale(1); }
+    45% { transform: translateY(-10px) scale(1.03); }
+    70% { transform: translateY(-6px) scale(1.02); }
+    100% { transform: translateY(-8px) scale(1.02); }
+}
+
+/* When hover ends, smoothly return to rest state using transition on transform */
+.button1, .button2, .button3, .button4, .button5, .button6, .button7, .button9, .button11, .button12, .button13 {
+    /* ensure transform resets after animation ends */
+    backface-visibility: hidden;
+}
+
+/* Accessibility: respect users who prefer reduced motion */
+/* @media (prefers-reduced-motion: reduce) {
+    .button1, .button2, .button3, .button4, .button5, .button6, .button7, .button9, .button11, .button12, .button13,
+    .button1:hover, .button2:hover, .button3:hover, .button4:hover, .button5:hover, .button6:hover, .button7:hover, .button9:hover, .button11:hover, .button12:hover, .button13:hover {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+*/
+.button14 {
+background-color: rgb(40, 163, 87);
+border-radius: 12px;
+cursor: default;
+padding: 0px 5px 0px 5px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+border-color: hsl(115, 84%, 43%);
+border-style: solid;
 }

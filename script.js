@@ -31,29 +31,64 @@ console.log(text3);
 return text3
 }
 function NumberFunction1() {
-    document.getElementById("output5").innerHTML = document.getElementById("NumberInput11").valueAsNumber+document.getElementById("NumberInput12").valueAsNumber;
-    console.log(NumberInput11.valueAsNumber+NumberInput12.valueAsNumber);
-    return NumberInput11.valueAsNumber+NumberInput12.valueAsNumber;
+  var a = document.getElementById("NumberInput11").valueAsNumber;
+  var b = document.getElementById("NumberInput12").valueAsNumber;
+  if (isNaN(a) || isNaN(b)) {
+    document.getElementById("output5").innerHTML = "Enter a number, not nothing!";
+    console.log('NumberFunction1: invalid input', a, b);
+    return;
+  }
+  var sum = a + b;
+  document.getElementById("output5").innerHTML = sum;
+  console.log(sum);
+  return sum;
   }
 
   function NumberFunction2() {
-    document.getElementById("output7").innerHTML = document.getElementById("NumberInput21").valueAsNumber*document.getElementById("NumberInput22").valueAsNumber;
-    console.log(NumberInput21.valueAsNumber*NumberInput22.valueAsNumber);
-    return NumberInput21.valueAsNumber*NumberInput22.valueAsNumber;
+    var a = document.getElementById("NumberInput21").valueAsNumber;
+    var b = document.getElementById("NumberInput22").valueAsNumber;
+    if (isNaN(a) || isNaN(b)) {
+        document.getElementById("output7").innerHTML = "Enter a number, not nothing!";
+        console.log('NumberFunction2: invalid input', a, b);
+        return;
+    }
+    var product = a * b;
+    document.getElementById("output7").innerHTML = product;
+    console.log(product);
+    return product;
   }
 
   function NumberFunction3() {
-    console.log(NumberInput31.valueAsNumber/NumberInput32.valueAsNumber);
-    if ((NumberInput31.valueAsNumber / NumberInput32.valueAsNumber) == Infinity) {document.getElementById("output8").innerHTML = "Divide By 0 Error"}
-    else {document.getElementById("output8").innerHTML = document.getElementById("NumberInput31").valueAsNumber/document.getElementById("NumberInput32").valueAsNumber}
-    console.log(document.getElementById("output8").innerHTML);
-    return NumberInput31.valueAsNumber / NumberInput32.valueAsNumber;
+    var a = document.getElementById("NumberInput31").valueAsNumber;
+    var b = document.getElementById("NumberInput32").valueAsNumber;
+    if (isNaN(a) || isNaN(b)) {
+        document.getElementById("output8").innerHTML = "Enter a number, not nothing!";
+        console.log('NumberFunction3: invalid input', a, b);
+        return;
+    }
+    if (b === 0) {
+        document.getElementById("output8").innerHTML = "Divide By 0 Error";
+        console.log('NumberFunction3: divide by zero');
+        return;
+    }
+    var quotient = a / b;
+    document.getElementById("output8").innerHTML = quotient;
+    console.log(quotient);
+    return quotient;
   }
 
   function NumberFunction4() {
-    document.getElementById("output9").innerHTML = document.getElementById("NumberInput41").valueAsNumber-document.getElementById("NumberInput42").valueAsNumber;
-    console.log(NumberInput41.valueAsNumber-NumberInput42.valueAsNumber);
-    return NumberInput41.valueAsNumber-NumberInput42.valueAsNumber;
+    var a = document.getElementById("NumberInput41").valueAsNumber;
+    var b = document.getElementById("NumberInput42").valueAsNumber;
+    if (isNaN(a) || isNaN(b)) {
+        document.getElementById("output9").innerHTML = "Enter a number, not nothing!";
+        console.log('NumberFunction4: invalid input', a, b);
+        return;
+    }
+    var diff = a - b;
+    document.getElementById("output9").innerHTML = diff;
+    console.log(diff);
+    return diff;
   }
 
 function RolltheDiceFunction() {const numbervar2 = 1; let text6 = "";  const text5 = "The dice result is..... "; let NumberDice = document.getElementById("DicedInput").valueAsNumber;
@@ -63,3 +98,45 @@ document.getElementById("output6").innerHTML = text6;
   console.log(text6);
 return text6
   }
+
+/* Autosize inputs: expand width when content overflows */
+(function(){
+  function measureText(text, input) {
+    // create a temporary span for accurate width measurement
+    var span = document.createElement('span');
+    span.style.visibility = 'hidden';
+    span.style.whiteSpace = 'pre';
+    span.style.font = window.getComputedStyle(input).font || '';
+    span.textContent = text || input.placeholder || input.value || '';
+    document.body.appendChild(span);
+    var w = span.getBoundingClientRect().width;
+    document.body.removeChild(span);
+    return w;
+  }
+
+  function autosizeInput(input) {
+    if (!input) return;
+    var padding = 32; // account for left/right padding
+    var min = 120; // px
+    var max = Math.min(window.innerWidth * 0.9, 900); // don't grow beyond viewport or a sane cap
+    var text = input.value || input.placeholder || '';
+    var measured = measureText(text, input) + padding;
+    var newWidth = Math.max(min, Math.min(measured, max));
+    input.style.width = newWidth + 'px';
+  }
+
+  function bindAll() {
+    var inputs = document.querySelectorAll('.input, input, input[type="number"], input[type="text"]');
+    inputs.forEach(function(i){
+      autosizeInput(i);
+      i.addEventListener('input', function(){ autosizeInput(i); });
+      // also adjust on change for programmatic value changes
+      i.addEventListener('change', function(){ autosizeInput(i); });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', bindAll);
+  window.addEventListener('resize', function(){
+    document.querySelectorAll('.input, input, input[type="number"], input[type="text"]').forEach(function(i){ autosizeInput(i); });
+  });
+})();
