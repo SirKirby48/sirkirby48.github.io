@@ -1,4 +1,4 @@
-# This is my professional porfolio
+# This is my professional portfolio
 
 ## Take a look around
 
