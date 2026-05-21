@@ -1,5 +1,5 @@
 h1 { 
-text-align: left;
+text-align: center;
 font-family: Xanmono;
 color: rgb(4, 53, 102);
 font-size: 31.5px;
@@ -27,16 +27,13 @@ font-size: 18px;
 
 .header1 {
 background-color: rgba(61, 204, 156, 0.774);
-padding: 15px 16px 15px 16px; 
+padding: 7px 8px 7px 8px; 
 border-radius: 12px;
-margin-top: 64px;
 color: rgb(4, 53, 102);
 text-align: center;
-font-size: 20px;
-height: 50px;
 align-content: center;
 align-self: center;
-display: table;
+display:inline-table;
 position: fixed;
 
 }
@@ -48,7 +45,11 @@ box-sizing: border-box;
 @media (max-width: 600px) {
 .header1 {
 width: 100%;
+/*min-height: 90%;
+height: auto; */
 height: auto;
+/*padding-block: 20px 20px 20px 20px; */
+padding: 20px 20px 20px 20px;
 }
 }
 
@@ -65,6 +66,12 @@ text-align: left;
 color: rgb(6, 43, 80);
 font-family: Andy;
 font-size: 26px;
+}
+i {
+text-align: left;
+color: rgb(6, 43, 80);
+font-family: Andy;
+font-size: 24px;
 }
 .strong1 {
 text-align: center;
@@ -116,6 +123,7 @@ src: url(Fonts/ANDYB.TTF);
 body {
 background-color: rgb(17, 170, 86);
 overflow: auto;
+margin-top: 100px;
 }
 
 .button1 {
@@ -303,7 +311,7 @@ color: rgb(47, 34, 124);}
 
 /* Hover: pop up with a slight bounce */
 .button1:hover, .button2:hover, .button3:hover, .button4:hover, .button5:hover, .button6:hover, .button7:hover, .button9:hover, .button11:hover, .button12:hover, .button13:hover {
-    animation: popup-bounce 360ms both;
+    animation: popup-bounce 130ms both;
     /* subtle shadow while lifted */
     box-shadow: 0 10px 18px rgba(0,0,0,0.18);
 }
