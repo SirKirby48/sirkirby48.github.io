@@ -78,7 +78,8 @@ function _createEmbed(src, name) {
 
 	// iframe
 	var iframe = document.createElement("iframe");
-	iframe.setAttribute("src", "APuzzleOfSortsv0-5-1.html");
+	// do not set src here — load will be performed explicitly so we can surface fetch errors
+	iframe.setAttribute("src", "about:blank");
 	iframe.setAttribute("name", name || "embed");
 	iframe.setAttribute("allow", "autoplay; fullscreen; encrypted-media");
 	iframe.setAttribute("allowfullscreen", "");
@@ -112,8 +113,36 @@ function loadItchEmbed() {
 }
 
 function loadPuzzleScriptEmbed() {
-	var embed = _createEmbed("APuzzleOfSortsv0-5-1.html", "A Puzzle Game of Sorts by Sir_Kirby!");
+	var src = "APuzzleOfSortsv0-5-1.html";
+	var embed = _createEmbed(src, "A Puzzle Game of Sorts by Sir_Kirby!");
 	document.body.appendChild(embed);
+	var iframe = embed.querySelector('iframe');
+	// Try fetching the HTML first so we can detect and report fetch failures on GitHub Pages.
+	fetch(src, { credentials: 'same-origin' })
+		.then(function (res) {
+			if (!res.ok) throw new Error('HTTP ' + res.status + ' ' + res.statusText);
+			return res.blob();
+		})
+		.then(function (blob) {
+			// Use a blob URL to load the fetched HTML into the iframe.
+			iframe.src = URL.createObjectURL(blob);
+		})
+		.catch(function (err) {
+			console.error('Failed to fetch embed source:', err);
+			var errMsg = document.createElement('div');
+			errMsg.style.color = 'red';
+			errMsg.style.margin = '8px';
+			errMsg.textContent = 'Failed to load game embed: ' + err.message + '. Try opening the game page directly.';
+			embed.appendChild(errMsg);
+		});
+	// Fallback error handler if iframe fails to load for other reasons
+	iframe.onerror = function () {
+		var n = document.createElement('div');
+		n.style.color = 'red';
+		n.style.margin = '8px';
+		n.textContent = 'Game embed failed to load.';
+		embed.appendChild(n);
+	};
 }
 </script>
 </body>

@@ -86,7 +86,8 @@ function _createEmbed(src, name) {
 	var container = document.createElement('div');
 	container.className = 'embed-container';
 	var iframe = document.createElement('iframe');
-	iframe.setAttribute('src', src);
+	// don't set src here; we'll fetch first to detect failures on GitHub Pages
+	iframe.setAttribute('src', 'about:blank');
 	iframe.setAttribute('name', name || 'embed');
 	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
 	iframe.setAttribute('allowfullscreen', '');
@@ -111,8 +112,33 @@ function loadItchEmbed() {
 }
 
 function loadPuzzleScriptEmbed() {
-	var embed = _createEmbed('TheTediousGamev1-8-9-1.html', 'The Tedious Game by Sir_Kirby!');
+	var src = 'TheTediousGamev1-8-9-1.html';
+	var embed = _createEmbed(src, 'The Tedious Game by Sir_Kirby!');
 	document.body.appendChild(embed);
+	var iframe = embed.querySelector('iframe');
+	fetch(src, { credentials: 'same-origin' })
+		.then(function (res) {
+			if (!res.ok) throw new Error('HTTP ' + res.status + ' ' + res.statusText);
+			return res.blob();
+		})
+		.then(function (blob) {
+			iframe.src = URL.createObjectURL(blob);
+		})
+		.catch(function (err) {
+			console.error('Failed to fetch embed source:', err);
+			var errMsg = document.createElement('div');
+			errMsg.style.color = 'red';
+			errMsg.style.margin = '8px';
+			errMsg.textContent = 'Failed to load game embed: ' + err.message + '. Try opening the game page directly.';
+			embed.appendChild(errMsg);
+		});
+	iframe.onerror = function () {
+		var n = document.createElement('div');
+		n.style.color = 'red';
+		n.style.margin = '8px';
+		n.textContent = 'Game embed failed to load.';
+		embed.appendChild(n);
+	};
 }
 </script>
 </body>
