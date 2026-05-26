@@ -41,7 +41,6 @@
 <br>
 <p>If that does not work, try this:</p>
 <button11 class="button11" onclick="loadPuzzleScriptEmbed()">Load PuzzleScript Embed</button11>
-<button11 id="fullscreen-ps-btn" class="button11" style="display:none;" onclick="fullscreenPuzzleScript()">Fullscreen PuzzleScript</button>
 <br>
 
 
@@ -67,25 +66,8 @@ function loadPuzzleScriptEmbed() {
 	x.setAttribute("width","400px");
 	x.setAttribute("height","200px");
 	x.setAttribute("name","The Tedious Game by Sir_Kirby!");
-	x.setAttribute("id", "puzzlescript-iframe");
 	document.body.appendChild(x);
-	// Show the fullscreen button
-	document.getElementById('fullscreen-ps-btn').style.display = '';
-}
-
-function fullscreenPuzzleScript() {
-	var iframe = document.getElementById("puzzlescript-iframe");
-	if (iframe) {
-		if (iframe.requestFullscreen) {
-			iframe.requestFullscreen();
-		} else if (iframe.mozRequestFullScreen) {
-			iframe.mozRequestFullScreen();
-		} else if (iframe.webkitRequestFullscreen) {
-			iframe.webkitRequestFullscreen();
-		} else if (iframe.msRequestFullscreen) {
-			iframe.msRequestFullscreen();
-		}
-	}
+	
 }
 
 

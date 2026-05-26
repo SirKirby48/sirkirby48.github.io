@@ -4,6 +4,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="Images/aposico.png">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Reuse embed container styles (kept local to this page) */
+.embed-container { display: inline-block; position: relative; margin: 10px 0; }
+.embed-container iframe { display: block; width: 400px; height: 200px; border: 0; border-radius: 6px; }
+.embed-fs-btn {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	z-index: 50;
+}
+.embed-container:fullscreen, .embed-container:-webkit-full-screen, .embed-container:-moz-full-screen {
+	width: 100vw !important;
+	height: 100vh !important;
+	margin: 0 !important;
+}
+.embed-container:fullscreen iframe, .embed-container:-webkit-full-screen iframe, .embed-container:-moz-full-screen iframe {
+	width: 100% !important;
+	height: 100% !important;
+}
+</style>
 <body>
 <header1 class="header1"><h1>Tamaz Devine Portfolio</h1>
 <button1><a class="button1" href="index.html" target="_self">Home</a></button1>
@@ -30,11 +56,39 @@
 <strong>If that does not work, try this:</strong>
 <br>
 <button class="button11" onclick="loadPuzzleScriptEmbed()">Load PuzzleScript Embed</button>
-<button id="fullscreen-ps-btn" class="button11" style="display:none;" onclick="fullscreenPuzzleScript()">Fullscreen PuzzleScript</button>
+
 <br>
 
 
 <script>
+
+function _requestFullscreen(el) {
+	if (!el) return;
+	var fn = el.requestFullscreen || el.mozRequestFullScreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+	if (fn) {
+		fn.call(el);
+	} else {
+		alert('Your browser does not support fullscreen for this element.');
+	}
+}
+
+function _createEmbed(src, name) {
+	var container = document.createElement('div');
+	container.className = 'embed-container';
+	var iframe = document.createElement('iframe');
+	iframe.setAttribute('src', src);
+	iframe.setAttribute('name', name || 'embed');
+	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
+	iframe.setAttribute('allowfullscreen', '');
+	iframe.style.border = '0';
+	var fsBtn = document.createElement('button');
+	fsBtn.className = 'embed-fs-btn button11';
+	fsBtn.textContent = 'Fullscreen';
+	fsBtn.onclick = function () { _requestFullscreen(container); };
+	container.appendChild(iframe);
+	container.appendChild(fsBtn);
+	return container;
+}
 
 
 function loadItchEmbed() {
@@ -45,39 +99,13 @@ function loadItchEmbed() {
 	x.setAttribute("width","400px");
 	x.setAttribute("height","200px");
 	x.setAttribute("name","A Puzzle of Sorts by Sir_Kirby!");
-	x.setAttribute("allowfullscreen", "");
 	document.body.appendChild(x);
 }
 
 function loadPuzzleScriptEmbed() {
-	let x = document.createElement("IFRAME");
-	x.setAttribute("src","APuzzleOfSortsv0-5-1.html");
-	x.setAttribute("allow","fullscreen");
-	x.setAttribute("resize","both");
-	x.setAttribute("width","400px");
-	x.setAttribute("height","200px");
-	x.setAttribute("name","A Puzzle of Sorts by Sir_Kirby!");
-	x.setAttribute("id", "puzzlescript-iframe");
-	document.body.appendChild(x);
-	// Show the fullscreen button
-	document.getElementById('fullscreen-ps-btn').style.display = '';
+	var embed = _createEmbed('APuzzleOfSortsv0-5-1.html', 'A Puzzle of Sorts by Sir_Kirby!');
+	document.body.appendChild(embed);
 }
-
-function fullscreenPuzzleScript() {
-	var iframe = document.getElementById("puzzlescript-iframe");
-	if (iframe) {
-		if (iframe.requestFullscreen) {
-			iframe.requestFullscreen();
-		} else if (iframe.mozRequestFullScreen) {
-			iframe.mozRequestFullScreen();
-		} else if (iframe.webkitRequestFullscreen) {
-			iframe.webkitRequestFullscreen();
-		} else if (iframe.msRequestFullscreen) {
-			iframe.msRequestFullscreen();
-		}
-	}
-}
-
 
 
 </script>
