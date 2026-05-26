@@ -35,71 +35,19 @@
 <button8 class="button8"><p>Use the arrow keys or WASD to move, push crates onto their respective target—the tutorial shows which crates go to which targets—and once all crates are on the targets, go to the Goal Flag.</p></button8>
 <button8 class="button8"><p>Or if you want to play it on itch.io, here is the link!</p></button8>
 <br>
-<button7><a class="button7" href="https://sir-kirby.itch.io/the-tedious-game" target="_blank">The Tedious Game on Itch</a></button7>
+<iframe src="https://itch.io/embed/3614876?linkback=true&amp;bg_color=0484d1&amp;fg_color=327345&amp;link_color=63c64d&amp;border_color=6e86a0" width="75%" height="auto"><a href="https://sir-kirby.itch.io/a-puzzle-game">A Puzzle Game by Sir_Kirby!</a></iframe>
 <br>
 <button11 class="button11" onclick="loadItchEmbed()">Load itch.io Embed</button11>
 <br>
 <p>If that does not work, try this:</p>
-<br>
 <button11 class="button11" onclick="loadPuzzleScriptEmbed()">Load PuzzleScript Embed</button11>
+<button11 id="fullscreen-ps-btn" class="button11" style="display:none;" onclick="fullscreenPuzzleScript()">Fullscreen PuzzleScript</button>
 <br>
 
-<style>
-/* Embed container styles reused across pages */
-.embed-container { display: inline-block; position: relative; margin: 10px 0; }
-.embed-container iframe { display: block; width: 400px; height: 200px; border: 0; border-radius: 6px; }
-.embed-fs-btn {
-	position: absolute;
-	top: 8px;
-	right: 8px;
-	padding: 6px 10px;
-	cursor: pointer;
-	background: rgba(0,0,0,0.6);
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	z-index: 50;
-}
-.embed-container:fullscreen, .embed-container:-webkit-full-screen, .embed-container:-moz-full-screen {
-	width: 100vw !important;
-	height: 100vh !important;
-	margin: 0 !important;
-}
-.embed-container:fullscreen iframe, .embed-container:-webkit-full-screen iframe, .embed-container:-moz-full-screen iframe {
-	width: 100% !important;
-	height: 100% !important;
-}
-</style>
+
 
 <script>
-function _requestFullscreen(el) {
-	if (!el) return;
-	var fn = el.requestFullscreen || el.mozRequestFullScreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
-	if (fn) {
-		fn.call(el);
-	} else {
-		alert('Your browser does not support fullscreen for this element.');
-	}
-}
 
-function _createEmbed(src, name) {
-	var container = document.createElement('div');
-	container.className = 'embed-container';
-	var iframe = document.createElement('iframe');
-	// don't set src here; we'll fetch first to detect failures on GitHub Pages
-	iframe.setAttribute('src', 'about:blank');
-	iframe.setAttribute('name', name || 'embed');
-	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
-	iframe.setAttribute('allowfullscreen', '');
-	iframe.style.border = '0';
-	var fsBtn = document.createElement('button');
-	fsBtn.className = 'embed-fs-btn button11';
-	fsBtn.textContent = 'Fullscreen';
-	fsBtn.onclick = function () { _requestFullscreen(container); };
-	container.appendChild(iframe);
-	container.appendChild(fsBtn);
-	return container;
-}
 
 function loadItchEmbed() {
 	let x = document.createElement("IFRAME");
@@ -112,34 +60,35 @@ function loadItchEmbed() {
 }
 
 function loadPuzzleScriptEmbed() {
-	var src = 'TheTediousGamev1-8-9-1.html';
-	var embed = _createEmbed(src, 'The Tedious Game by Sir_Kirby!');
-	document.body.appendChild(embed);
-	var iframe = embed.querySelector('iframe');
-	fetch(src, { credentials: 'same-origin' })
-		.then(function (res) {
-			if (!res.ok) throw new Error('HTTP ' + res.status + ' ' + res.statusText);
-			return res.blob();
-		})
-		.then(function (blob) {
-			iframe.src = URL.createObjectURL(blob);
-		})
-		.catch(function (err) {
-			console.error('Failed to fetch embed source:', err);
-			var errMsg = document.createElement('div');
-			errMsg.style.color = 'red';
-			errMsg.style.margin = '8px';
-			errMsg.textContent = 'Failed to load game embed: ' + err.message + '. Try opening the game page directly.';
-			embed.appendChild(errMsg);
-		});
-	iframe.onerror = function () {
-		var n = document.createElement('div');
-		n.style.color = 'red';
-		n.style.margin = '8px';
-		n.textContent = 'Game embed failed to load.';
-		embed.appendChild(n);
-	};
+	let x = document.createElement("IFRAME");
+	x.setAttribute("src","TheTediousGamev1-8-9-1.html");
+	x.setAttribute("allow","fullscreen");
+	x.setAttribute("resize","both");
+	x.setAttribute("width","400px");
+	x.setAttribute("height","200px");
+	x.setAttribute("name","The Tedious Game by Sir_Kirby!");
+	x.setAttribute("id", "puzzlescript-iframe");
+	document.body.appendChild(x);
+	// Show the fullscreen button
+	document.getElementById('fullscreen-ps-btn').style.display = '';
 }
+
+function fullscreenPuzzleScript() {
+	var iframe = document.getElementById("puzzlescript-iframe");
+	if (iframe) {
+		if (iframe.requestFullscreen) {
+			iframe.requestFullscreen();
+		} else if (iframe.mozRequestFullScreen) {
+			iframe.mozRequestFullScreen();
+		} else if (iframe.webkitRequestFullscreen) {
+			iframe.webkitRequestFullscreen();
+		} else if (iframe.msRequestFullscreen) {
+			iframe.msRequestFullscreen();
+		}
+	}
+}
+
+
 </script>
 </body>
 </html>
