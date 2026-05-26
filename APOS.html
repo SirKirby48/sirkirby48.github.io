@@ -73,21 +73,20 @@ function _requestFullscreen(el) {
 }
 
 function _createEmbed(src, name) {
-	var container = document.createElement('div');
-	container.className = 'embed-container';
-	var iframe = document.createElement('iframe');
-	iframe.setAttribute('src', src);
-	iframe.setAttribute('name', name || 'embed');
-	iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
-	iframe.setAttribute('allowfullscreen', '');
-	iframe.style.border = '0';
-	var fsBtn = document.createElement('button');
-	fsBtn.className = 'embed-fs-btn button11';
-	fsBtn.textContent = 'Fullscreen';
-	fsBtn.onclick = function () { _requestFullscreen(container); };
-	container.appendChild(iframe);
-	container.appendChild(fsBtn);
-	return container;
+	var x = document.createElement("div");
+	x.className = "embed-container";
+	var iframe = document.createElement("IFRAME");
+	iframe.setAttribute("src", src);
+	iframe.setAttribute("name", name || "embed");
+	iframe.setAttribute("allow", "autoplay; fullscreen; encrypted-media");
+	iframe.style.border = "0";
+	var fsBtn = document.createElement("button");
+	fsBtn.className = "embed-fs-btn button11";
+	fsBtn.textContent = "Fullscreen";
+	fsBtn.onclick = function () { _requestFullscreen(x); };
+	x.appendChild(iframe);
+	x.appendChild(fsBtn);
+	return x;
 }
 
 
@@ -103,7 +102,7 @@ function loadItchEmbed() {
 }
 
 function loadPuzzleScriptEmbed() {
-	var embed = _createEmbed('APuzzleOfSortsv0-5-1.html', 'A Puzzle of Sorts by Sir_Kirby!');
+	var embed = _createEmbed("APuzzleOfSortsv0-5-1.html", "A Puzzle of Sorts by Sir_Kirby!");
 	document.body.appendChild(embed);
 }
 
