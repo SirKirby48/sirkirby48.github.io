@@ -5,7 +5,8 @@
 - [x] fix JSmathFunctions.html return values
 - [x] explain roles in projects
 - [x] fix button requiring dlbclick
-- [ ] Fix APOS.html PuzzleScript Embed broken link
+- [x] Fix APOS.html PuzzleScript Embed broken link
+  - It was a GitHub file name mismatch
 - [x] do something to tell people most important/most impressive work(s) is(are)
 - [x] fix too small font size
 - [x] fix header misfitting wrap
