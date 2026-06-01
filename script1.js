@@ -5,6 +5,54 @@ console.log("HELLO YOU!");
   
 let text
 { if (Math.random() < 0.5) {
+
+/* Autosize inputs: expand width when content overflows (copied/adapted from script.js) */
+(function(){
+	function measureText(text, input) {
+		var span = document.createElement('span');
+		span.style.visibility = 'hidden';
+		span.style.whiteSpace = 'pre';
+		span.style.font = window.getComputedStyle(input).font || '';
+		span.textContent = text || input.placeholder || input.value || '';
+		document.body.appendChild(span);
+		var w = span.getBoundingClientRect().width;
+		document.body.removeChild(span);
+		return w;
+	}
+
+	function autosizeInput(input) {
+		if (!input) return;
+		var padding = 32; // account for left/right padding
+		var min = 60; // smaller default for stat inputs
+		var max = Math.min(window.innerWidth * 0.9, 900);
+		var text = input.value || '';
+		var measured = measureText(text, input) + padding;
+		var newWidth = Math.max(min, Math.min(measured, max));
+		input.style.width = newWidth + 'px';
+	}
+
+	function bindAll() {
+		// target the inputs used by this script
+		var inputs = [];
+		['FirstINT','SecondINT','ThirdINT'].forEach(function(id){
+			var el = document.getElementById(id);
+			if (el) inputs.push(el);
+		});
+		// include any other number/text inputs on the page
+		document.querySelectorAll('input[type="number"], input[type="text"]').forEach(function(i){
+			if (inputs.indexOf(i) === -1) inputs.push(i);
+		});
+
+		inputs.forEach(function(i){
+			autosizeInput(i);
+			i.addEventListener('input', function(){ autosizeInput(i); });
+			i.addEventListener('change', function(){ autosizeInput(i); });
+		});
+	}
+
+	document.addEventListener('DOMContentLoaded', bindAll);
+	window.addEventListener('resize', function(){ bindAll(); });
+})();
 text = "Hello there!";
 } else {
 text = "Good Day to You!";
