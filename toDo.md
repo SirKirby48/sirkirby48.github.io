@@ -13,7 +13,7 @@
 - [x] explain the project descriptions more
 - [x] fix iframe bounce on hover
 - [x] fix centering
-- [ ] spruce up home page
+- [x] spruce up home page
 - [x] fix having to zoom in to read (font size thing)
 - [x] make (more or less) all font uniformly positioned
 - [x] explain what is enjoyable to work on
