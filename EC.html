@@ -4,7 +4,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="Images/ecico.png">
 <link rel="stylesheet" href="style.css">
+<style>
+/* Reuse embed container styles (kept local to this page) */
+.embed-container { display: inline-block; position: relative; margin: 10px 0; }
+.embed-container iframe { display: block; width: 400px; height: 200px; border: 0; border-radius: 6px; }
+.embed-fs-btn {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	z-index: 50;
+}
+.embed-container:fullscreen, .embed-container:-webkit-full-screen, .embed-container:-moz-full-screen {
+	width: 100vw !important;
+	height: 100vh !important;
+	margin: 0 !important;
+}
+.embed-container:fullscreen iframe, .embed-container:-webkit-full-screen iframe, .embed-container:-moz-full-screen iframe {
+	width: 100% !important;
+	height: 100% !important;
+}
+</style>
 <body>
+<button title="Back to top" class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:6px;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);opacity:0;visibility:hidden;transition:opacity .18s,transform .18s,visibility .18s;">▲</button>
 <header1 class="header1"><h1>Tamaz Devine Portfolio</h1>
 <button1><a class="button1" href="index.html" target="_self">Home</a></button1>
 <button2><a class="button2" href="About.html" target="_self">About</a></button2>
@@ -37,32 +64,7 @@
 <br>
 <iframe src="https://itch.io/embed/3944305?linkback=true&amp;bg_color=1e39a1&amp;fg_color=43e5fa&amp;link_color=63cb9b&amp;border_color=3e4770" width="75%" height="auto"><a href="https://sir-kirby.itch.io/echo-chambers">Echo Chambers by Sir_Kirby!</a></iframe>
 <br> 
-<style>
-/* Reuse embed container styles (kept local to this page) */
-.embed-container { display: inline-block; position: relative; margin: 10px 0; }
-.embed-container iframe { display: block; width: 400px; height: 200px; border: 0; border-radius: 6px; }
-.embed-fs-btn {
-	position: absolute;
-	top: 8px;
-	right: 8px;
-	padding: 6px 10px;
-	cursor: pointer;
-	background: rgba(0,0,0,0.6);
-	color: #fff;
-	border: none;
-	border-radius: 4px;
-	z-index: 50;
-}
-.embed-container:fullscreen, .embed-container:-webkit-full-screen, .embed-container:-moz-full-screen {
-	width: 100vw !important;
-	height: 100vh !important;
-	margin: 0 !important;
-}
-.embed-container:fullscreen iframe, .embed-container:-webkit-full-screen iframe, .embed-container:-moz-full-screen iframe {
-	width: 100% !important;
-	height: 100% !important;
-}
-</style>
+
 
 <script>
 function _requestFullscreen(el) {
@@ -106,6 +108,16 @@ function loadConstructEmbed() {
 	var embed = _createEmbed('echoChambers/index.html', 'Echo Chambers by Sir_Kirby!');
 	document.body.appendChild(embed);
 }
+</script>
+<script>
+(function(){
+	var btn = document.querySelector('.back-to-top');
+	if (!btn) return;
+	window.addEventListener('scroll', function(){
+		if (window.scrollY > 200) { btn.style.opacity = '1'; btn.style.visibility = 'visible'; }
+		else { btn.style.opacity = '0'; btn.style.visibility = 'hidden'; }
+	});
+})();
 </script>
 </body>
 </html>

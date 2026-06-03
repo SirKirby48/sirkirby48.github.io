@@ -5,6 +5,7 @@
 <link rel="icon" type="image/png" href="Images/php.jpg">
 <link rel="stylesheet" href="style.css">
 <body>
+<button title="Back to top" class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});" style="position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:6px;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);opacity:0;visibility:hidden;transition:opacity .18s,transform .18s,visibility .18s;">▲</button>
 <header1 class="header1"><h1>Tamaz Devine Portfolio</h1>
 <button1><a class="button1" href="index.html" target="_self">Home</a></button1>
 <button2><a class="button2" href="About.html" target="_self">About</a></button2>
@@ -22,14 +23,14 @@
 <h2>Hello There!</h2>
 <strong>Here are some images of my created arts pieces</strong>
 <br><strong>Echo Chambers Logos (one is a JPEG, the other is a WEBP)</strong><br>
-<img src="Images/EClogo1.jpg" style="width: 45%; height: auto;" alt="Echo Chambers Logo JPEG">
-<img src="Images/EClogo2.webp" style="width: 45%; height: auto;" alt="Echo Chambers Logo WEBP">
-<br><strong>The Cowled Warlock (a servant boss that never made it into the game)</strong><br><img src="Images/cowledWarlockBasicSketch.jpg" style="width: 45%; height: auto;" alt="Echo Chambers, The Cowled Warlock (a servant boss that never made it into the game)"><img src="Images/cowledWarlockLfRf.png" style="width: 45%; height: auto;" alt="Echo Chambers, The Cowled Warlock (left and right views) (a servant boss that never made it into the game)">
-<br><strong>The Voidency Unnamed (a servant boss that never made it into the game)<br></strong><img src="Images/TheVoidencyUnnamed.gif" style="width: 45%; height: auto;" alt="Echo Chambers, The Voidency Unnamed (a servant boss that never made it into the game)">
+<img src="Images/EClogo1.jpg" style="width: 35%; height: auto;" alt="Echo Chambers Logo JPEG">
+<img src="Images/EClogo2.webp" style="width: 35%; height: auto;" alt="Echo Chambers Logo WEBP">
+<br><strong>The Cowled Warlock (a servant boss that never made it into the game)</strong><br><img src="Images/cowledWarlockBasicSketch.jpg" style="width: 35%; height: auto;" alt="Echo Chambers, The Cowled Warlock (a servant boss that never made it into the game)"><img src="Images/cowledWarlockLfRf.png" style="width: 35%; height: auto;" alt="Echo Chambers, The Cowled Warlock (left and right views) (a servant boss that never made it into the game)">
+<br><strong>The Voidency Unnamed (a servant boss that never made it into the game)<br></strong><img src="Images/TheVoidencyUnnamed.gif" style="width: 35%; height: auto;" alt="Echo Chambers, The Voidency Unnamed (a servant boss that never made it into the game)">
 <br>
 <br>
 <strong>Other Game Art</strong><br>
-<strong>Fragmented Game Logo (a scrapped visual novel game that was never completed)</strong><br><img src="Images/fragmentedLogo.png" style="width: 45%; height: auto;" alt="Fragmented Game Logo (a scrapped game that was never completed)">
+<strong>Fragmented Game Logo (a scrapped visual novel game that was never completed)</strong><br><img src="Images/fragmentedLogo.png" style="width: 35%; height: auto;" alt="Fragmented Game Logo (a scrapped game that was never completed)">
 <br>
 <br>
 <!--
@@ -47,6 +48,15 @@
 <br>
 
 
-
+<script>
+(function(){
+	var btn = document.querySelector('.back-to-top');
+	if (!btn) return;
+	window.addEventListener('scroll', function(){
+		if (window.scrollY > 200) { btn.style.opacity = '1'; btn.style.visibility = 'visible'; }
+		else { btn.style.opacity = '0'; btn.style.visibility = 'hidden'; }
+	});
+})();
+</script>
 </body>
 </html>
